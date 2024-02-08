@@ -1,5 +1,5 @@
 <?php
-include('dB.php');
+require('dB.php');
 $id=$_REQUEST['id'];
 $query = "SELECT * from new_record where id='".$id."'"; 
 $result = mysqli_query($con, $query) or die ( mysqli_error($con));
@@ -15,8 +15,7 @@ $row = mysqli_fetch_assoc($result);
 <body>
 <div class="form">
 <p><a href="index.php">Home</a> 
-| <a href="insert.php">Insert New Record</a> 
-| <a href="logout.php">Logout</a></p>
+| <a href="insert.php">Insert New Record</a></p>
 <h1>Update Record</h1>
 <?php
 $status = "";

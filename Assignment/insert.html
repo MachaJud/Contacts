@@ -13,14 +13,15 @@
 				<h1>Insert New Records</h1>
 
 				 <!-- Update action attribute -->
-				<form name="form" action="new_records.php" method="POST">
-					<input type="hidden" name="new" value="1" />
-					<p><input type="text" name="First"  placeholder="Enter First Name" required /></p>
-					<p><input type="text" name="Last" placeholder="Enter Last Name" required /></p>
-					<p><input type="text" name="Mobile" placeholder="Enter Mobile" required /></p>
-					<p><input type="text" name="Fax" placeholder="Enter Fax" required /></p>
-					<p><input type="text" name="Email" placeholder="Enter Email Address" required /></p>
-					<p><input type="text" name="Web"  placeholder="Enter portfolio" required /></p>
+				<form action="new_record.php" method="POST">
+					<!--input type="hidden" name="new" value="1" /-->
+					<p><input type="id" name="id"  placeholder="Enter User Id" required /></p>
+					<p><input type="First" name="First"  placeholder="Enter First Name" required /></p>
+					<p><input type="Last" name="Last" placeholder="Enter Last Name" required /></p>
+					<p><input type="Mobile" name="Mobile" placeholder="Enter Mobile" required /></p>
+					<p><input type="Fax" name="Fax" placeholder="Enter Fax" required /></p>
+					<p><input type="Email" name="Email" placeholder="Enter Email Address" required /></p>
+					<p><input type="Web" name="Web"  placeholder="Enter portfolio" required /></p>
 
 					<input type="submit" value="Submit">
 				</form>
