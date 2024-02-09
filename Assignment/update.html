@@ -1,61 +1,29 @@
-<?php
-require('dB.php');
-$id=$_REQUEST['id'];
-$query = "SELECT * from new_record where id='".$id."'"; 
-$result = mysqli_query($con, $query) or die ( mysqli_error($con));
-$row = mysqli_fetch_assoc($result);
-?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Update Record</title>
+<title>Update Records</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="form">
-<p><a href="index.php">Home</a> 
-| <a href="insert.php">Insert New Record</a></p>
-<h1>Update Record</h1>
-<?php
-$status = "";
-if(isset($_POST['new']) && $_POST['new']==1)
-{
- $id = $_REQUEST['id'];
- $First =$_REQUEST['First'];
- $Last = $_REQUEST['Last'];
- $Mobile = $_REQUEST['Mobile'];
- $Fax = $_REQUEST['Fax'];
- $Email = $_REQUEST['Email'];
- $Web = $_REQUEST['Web'];
-$update="update new_record,
-First='".$First."', Last='".$Last."',Mobile='".$Mobile."',Fax='".$Fax."',Email='".$Email."',Web='".$Web."', where id='".$id."'";
-mysqli_query($con, $update) or die(mysqli_error($con));
-$status = "Record Updated Successfully. </br></br>
-<a href='view.php'>View Updated Record</a>";
-echo '<p style="color:#FF0000;">'.$status.'</p>';
-}else {
-?>
-<div>
-<form name="form" method="post" action=""> 
-<input type="hidden" name="new" value="1" />
-<input name="id" type="hidden" value="<?php echo $row['id'];?>" />
-<p><input type="text" name="First" placeholder="Enter Name" 
-required value="<?php echo $row['First'];?>" /></p>
-<p><input type="text" name="Last" placeholder="Enter Last name" 
-required value="<?php echo $row['Last'];?>" /></p>
-<p><input type="text" name="Mobile" placeholder="Enter mobile No." 
-required value="<?php echo $row['Mobile'];?>" /></p>
-<p><input type="text" name="Fax" placeholder="Enter Fax No." 
-required value="<?php echo $row['Fax'];?>" /></p>
-<p><input type="text" name="Email" placeholder="Enter e-mail address" 
-required value="<?php echo $row['Email'];?>" /></p>
-<p><input type="text" name="Web" placeholder="Enter web address" 
-required value="<?php echo $row['Web'];?>" /></p>
-<p><input name="submit" type="submit" value="Update" /></p>
-</form>
-<?php } ?>
-</div>
-</div>
+    <center>
+        <div class="form">
+            <p><a href="index.html">Home</a> | <a href="view.html">View Records</a></p>
+            <div>
+                <h1>Update Record</h1>
+                <form name="updateForm" method="post" action="update.php">
+                    <p><input type="text" name="id" placeholder="Enter ID of Record to Update" required /></p>
+                    <p><input type="text" name="First" placeholder="Enter First Name" required /></p>
+                    <p><input type="text" name="Last" placeholder="Enter Last Name" required /></p>
+                    <p><input type="text" name="Mobile" placeholder="Enter Mobile" required /></p>
+                    <p><input type="text" name="Fax" placeholder="Enter Fax" required /></p>
+                    <p><input type="text" name="Email" placeholder="Enter Email Address" required /></p>
+                    <p><input type="text" name="Web" placeholder="Enter portfolio" required /></p>
+
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+    </center>
 </body>
 </html>

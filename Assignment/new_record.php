@@ -1,5 +1,5 @@
 <?php
-//craete variables to hold and store the data from the form
+//create variables to hold and store the data from the form
 //Take data from the form and input them into the database
 $id = $_POST['id'];
 $First = $_POST['First'];

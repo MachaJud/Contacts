@@ -1,51 +1,54 @@
-<?php
-required('dB.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>View Records</title>
 <link rel="stylesheet" href="css/style.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="form">
-<p><a href="index.html">Home</a> 
-| <a href="new_record.php">Insert New Record</a></p> 
-<h2>View Records</h2>
-<table width="100%" border="1" style="border-collapse:collapse;">
-<thead>
-<tr>
-<th><strong>ID </strong></th>
-<th><strong>First Name</strong></th>
-<th><strong>Last Name</strong></th>
-<th><strong>Mobile</strong></th>
-<th><strong>Fax</strong></th>
-<th><strong>Email</strong></th>
-<th><strong>Web</strong></th>
-<th><strong>Edit</strong></th>
-</tr>
-</thead>
-<tbody>
-<?php
-$count=1;
-$sel_query="Select * from contact_info ORDER BY id desc;";
-$result = mysqli_query($con,$sel_query);
-while($row = mysqli_fetch_assoc($result)) { ?>
-<tr><td align="center"><?php echo $count; ?></td>
-<td align="center"><?php echo $row["First"]; ?></td>
-<td align="center"><?php echo $row["Last"]; ?></td>
-<td align="center"><?php echo $row["Mobile"]; ?></td>
-<td align="center"><?php echo $row["Fax"]; ?></td>
-<td align="center"><?php echo $row["Email"]; ?></td>
-<td align="center"><?php echo $row["Web"]; ?></td>
-<td align="center">
-<a href="edit.php?id=<?php echo $row["id"]; ?>">Edit</a>
-</td>
-</tr>
-<?php $count++; } ?>
-</tbody>
-</table>
+    <p><a href="index.html">Home</a> | <a href="new_record.php">Insert New Record</a></p> 
+    <h2>View Records</h2>
+    <div id="records-container"></div>
 </div>
+
+<script>
+// Use jQuery to fetch data from PHP file and update HTML content
+$(document).ready(function(){
+    $.ajax({
+        url: 'view.php', // Replace 'retrieve_records.php' with the correct path to your PHP file
+        type: 'GET',
+        success: function(response) {
+            // Parse the JSON response into JavaScript objects
+            var records = JSON.parse(response);
+
+            // Create a string to store the HTML content
+            var htmlContent = '';
+
+            // Loop through the records and generate HTML for each record
+            for (var i = 0; i < records.length; i++) {
+                htmlContent += '<div>';
+                htmlContent += '<p>ID: ' + records[i].id + '</p>';
+                htmlContent += '<p>First Name: ' + records[i].First + '</p>';
+                htmlContent += '<p>Last Name: ' + records[i].Last + '</p>';
+                htmlContent += '<p>Mobile: ' + records[i].Mobile + '</p>';
+                htmlContent += '<p>Fax: ' + records[i].Fax + '</p>';
+                htmlContent += '<p>Email: ' + records[i].Email + '</p>';
+                htmlContent += '<p>Web: ' + records[i].Web + '</p>';
+                htmlContent += '<p><a href="edit.php?id=' + records[i].id + '">Edit</a></p>';
+                htmlContent += '</div>';
+            }
+
+            // Update the HTML content of the records container
+            $('#records-container').html(htmlContent);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching records:', error);
+        }
+    });
+});
+</script>
+
 </body>
 </html>
